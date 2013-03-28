@@ -4,8 +4,6 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , redis = require('./lib/redistogo')
   , path = require('path')
@@ -46,17 +44,14 @@ app.get('/counter/:repoid',function (req, res) {
       redis_client.incr(repo_id, function(err, value) {
         console.log(value);
         res.cookie('repo_track', { viewed: 1 }, { expires: new Date(Date.now() + (60*60*60)) });
-        canvas = new Canvas(200,200);
+        canvas = new Canvas(50,20);
         ctx = canvas.getContext('2d');
-        ctx.font = '30px Impact';
-        ctx.fillText(value, 50, 100);
+        ctx.font = '20px Verdana';
+        ctx.fillText(value, 0, 15);
         var te = ctx.measureText(value);
-        ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-        ctx.beginPath();
-        ctx.lineTo(50, 102);
-        ctx.lineTo(50 + te.width, 102);
-        ctx.stroke();
+        //ctx.strokeStyle = 'rgba(0,0,0,0.5)';
         res.send(canvas.toBuffer());
+        //res.render('views', {views: canvas.toDataURL()});
         res.end();
       });
     });
