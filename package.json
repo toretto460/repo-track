@@ -9,7 +9,7 @@
     "express": "3.1.0",
     "jade": "*",
     "redis": ">=0.8.1",
-    "canvas": "git://github.com/elspoono/node-canvas-heroku.git"
+    "canvas": "*"
   },
   "engines": {
     "node": ">= 0.8.0",
