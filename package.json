@@ -9,7 +9,7 @@
     "express": "3.1.0",
     "jade": "*",
     "redis": ">=0.8.1",
-    "canvas": "*"
+    "canvas": "0.12.x"
   },
   "engines": {
     "node": ">=0.4.7 <0.7.0",
