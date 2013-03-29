@@ -7,12 +7,12 @@
   },
   "dependencies": {
     "express": "3.1.0",
-    "jade": "*",
+    "hbs": "*",
     "redis": ">=0.8.1",
-    "canvas": "0.12.x"
+    "canvas": "*"
   },
   "engines": {
-    "node": ">=0.4.7 <0.7.0",
+    "node": ">=0.8.x",
     "npm": ">=1.0.0"
   }
 }
