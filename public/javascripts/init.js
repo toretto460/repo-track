@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	$.ajax({
-		url: "/repo/new",
+		url: "/register",
 		success: function (data, status, jqXHR) {
-			$('#modal-components').append(data);
+			$('#form').append(data);
+				$('#repo-save').fadeIn('slow');
 		}
 	});
 });

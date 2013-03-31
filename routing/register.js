@@ -1,13 +1,39 @@
-exports.register = {
-	"new" : function (req, res) {
+module.exports = function ( app ) {
+	app.get('/register', function (req, res) {
 		var data = {
-			url: "/register/save",
+			url: "/register",
 			default_timeout: '10'
 		}
-		res.render('forms/new-repo.html', data);
-	},
-	"save" : function (req, res) {
-		res.send('registration save need to be implemented');
-		res.end();
-	}
+		res.render('register/new_repo.html', data);
+	});
+
+	app.post('/register', function (req, res) {
+		var MD5 = require('MD5');
+		name = req.body.repo_name;
+		if ( name ){
+			//generate repo id
+			repo_id = MD5(name);
+			//check if repoid already exists
+			app.get('redis_client').hexists(repo_id, 'counter', function(err, exists){
+				if ( !exists ) {
+					//create a set for this repo
+					app.get('redis_client').hset(repo_id,  'counter', 0);
+					url = app.get('domain') + repo_id + '/counter'; 
+					var snippet = app.render('counter/snippet.html', { url: url}, function(err, html){
+						if (err) {
+							res.send(500, {message: 'rendering error.',  code: 500});
+						} else {
+							res.send(200, { message:'created.', id: repo_id, snippet: html, code: 200} );	
+						}
+					});
+					
+				} else {
+					res.send(409, { message: 'already exists.',  code: 409} );
+				}
+			});	
+		} else {
+			res.send(500, { message: 'bad parameters.', code: 500} );
+		}
+		
+	});
 };
