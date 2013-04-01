@@ -12,6 +12,9 @@
     "canvas": "*",
     "MD5": ">=1.0.3"
   },
+    "scripts": {
+     "start": "bin/app"
+   },
   "engines": {
     "node": ">=0.8.x",
     "npm": ">=1.0.0"
