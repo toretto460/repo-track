@@ -1,4 +1,7 @@
+var repo_model = require('../model/repo');
+
 module.exports = function ( app ) {
+
 	app.get('/register', function (req, res) {
 		var data = {
 			url: "/register",
@@ -17,7 +20,8 @@ module.exports = function ( app ) {
 			app.get('redis_client').hexists(repo_id, 'counter', function(err, exists){
 				if ( !exists ) {
 					//create a set for this repo
-					app.get('redis_client').hset(repo_id,  'counter', 0);
+					app.get('redis_client').hmset(repo_id,  repo_model);
+
 					url = app.get('domain') + repo_id + '/counter'; 
 					var snippet = app.render('counter/snippet.html', { url: url}, function(err, html){
 						if (err) {
