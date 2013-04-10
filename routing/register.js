@@ -1,10 +1,24 @@
 module.exports = function ( app ) {
 	app.get('/register', function (req, res) {
-		var data = {
-			url: "/register",
-			default_timeout: '10'
+		if (req.session.auth) {
+      user = req.session.auth.github.user.login;
+			var data = {
+				url: "/register",
+				name: "repo-save",
+				user: user
+			}
+
+			app.render('register/new_repo.html', data, function(err, html){
+				res.json(
+					{
+						html: html,
+						name: data.name
+					}
+					);
+			});
+		} else {
+			res.send(404, 'Please Login!');
 		}
-		res.render('register/new_repo.html', data);
 	});
 
 	app.post('/register', function (req, res) {
