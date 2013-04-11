@@ -8,7 +8,7 @@ module.exports = function(app) {
     var cookie = req.cookies.repo_track;
 
     var sendCanvas = function (res, value) {
-      res.cookie('repo_track', { viewed: 1 }, { expires: new Date(Date.now() + (60*60*60)) });
+      res.cookie('repo_track', { viewed: 1 }, { expires: new Date(Date.now() + (30*24*60*60*1000)) });
       canvas = new Canvas(50,20);
       ctx = canvas.getContext('2d');
       ctx.font = '20px Verdana';
