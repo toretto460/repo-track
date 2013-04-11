@@ -1,20 +1,26 @@
-<form id="repo-save" style="display: none;" class="centered" method="POST" action="{{ url }}" name="repo-add">
-  <input type="text" name="repo_name" class="centered input-xxlarge" placeholder="https://github.com/toretto460/repo-track.git">
-  <input type="submit" id="repo-add-submit" class="btn btn-inverse btn-large centered" value="Generate your badge">
-    <script type="text/javascript">
-    $('#repo-add-submit').click(function() {
-      $.post('{{ url }}',$("#repo-save").serialize(), function(data){
-        if( data.code == 200 ){
-          $('#repo-id').text(data.snippet);
-        } else {
-          $('#repo-id').text(data.snippet);
-        }
-        $('#repo-id').fadeIn('slow');
+<div class="central-box">
+  <h2>@{{ user }}</h2>
+  <div id="form">
+    <form id="repo-save" style="display: none;" class="centered" method="POST" action="{{ url }}" name="repo-add">
+      <input type="text" name="repo_name" class="centered input-xxlarge" placeholder="https://github.com/toretto460/repo-track.git">
+      <input type="submit" id="repo-add-submit" class="btn btn-inverse btn-large centered" value="Generate your badge">
+      <script type="text/javascript">
+      $('#repo-add-submit').click(function() {
+        $.post('{{ url }}',$("#repo-save").serialize(), function(data){
+          if( data.code == 200 ){
+            $('#repo-id').text(data.snippet);
+          } else {
+            $('#repo-id').text(data.snippet);
+          }
+          $('#repo-id').fadeIn('slow');
+        });
+        return false;
       });
-      return false;
-    });
-  </script>
-</form>
-<div id="repo-info">
-  <pre id="repo-id" style="display: none;"></pre>
+      $('#repo-save').fadeIn('slow');
+    </script>
+    </form>
+    <div id="repo-info">
+      <pre id="repo-id" style="display: none;"></pre>
+    </div>
+  </div>
 </div>

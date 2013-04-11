@@ -10,7 +10,8 @@
     "hbs": "*",
     "redis": ">=0.8.1",
     "canvas": "*",
-    "MD5": ">=1.0.3"
+    "MD5": ">=1.0.3",
+    "everyauth": "git://github.com/bnoguchi/everyauth.git"
   },
     "scripts": {
      "start": "bin/app"
