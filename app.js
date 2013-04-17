@@ -30,7 +30,7 @@ app.configure(function(){
   
   app.use(express.cookieParser('hjdgasjhdff9237834bj'));
   app.use(express.cookieSession());
-  app.use(everyauth.middleware());
+  app.use(everyauth.middleware(app));
 });
 
 app.configure('development', function(){
