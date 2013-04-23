@@ -35,7 +35,7 @@ module.exports = function ( app ) {
 
 	app.get('/private/repos', function(req, res){
 
-			github.repos.getFromUser({
+			github.api.repos.getFromUser({
 			    user: req.session.auth.github.user.login
 			}, function(err, data) {
 				if(err){
