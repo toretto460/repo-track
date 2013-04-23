@@ -11,7 +11,8 @@
     "redis": ">=0.8.1",
     "canvas": "*",
     "MD5": ">=1.0.3",
-    "everyauth": "git://github.com/bnoguchi/everyauth.git"
+    "everyauth": "git://github.com/bnoguchi/everyauth.git",
+    "github": "0.1.8"
   },
     "scripts": {
      "start": "bin/app"

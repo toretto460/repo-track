@@ -12,36 +12,9 @@ var express = require('express')
   , conf = require('./config/config')
   ;
 
-var usersByGhId = {};
-var nextUserId = 0;
-
-function addUser (source, sourceUser) {
-  var user;
-  if (arguments.length === 1) { // password-based
-    user = sourceUser = source;
-    user.id = ++nextUserId;
-    return usersByGhId[nextUserId] = user;
-  } else { // non-password-based
-    user = usersByGhId[++nextUserId] = {id: nextUserId};
-    user[source] = sourceUser;
-  }
-  return user;
-}
-
-everyauth.everymodule
-  .findUserById( function (id, callback) {
-    callback(null, usersByGhId[id]);
-  });
-
-//Github login
-everyauth.github
-  .appId(conf.github.appId)
-  .appSecret(conf.github.appSecret)
-  .callbackPath('/auth/github/callback')
-  .findOrCreateUser( function (sess, accessToken, accessTokenExtra, ghUser) {
-      return  [ghUser.id] || (usersByGhId[ghUser.id] = addUser('github', ghUser));
-  })
-  .redirectPath('/private');
+//Managers 
+var user_manager = require('./manager/user_manager');
+user_manager.connect(app, everyauth, conf);
 
 app.configure(function(){
   var redis_client = redis.createClient();
@@ -57,19 +30,19 @@ app.configure(function(){
   
   app.use(express.cookieParser('hjdgasjhdff9237834bj'));
   app.use(express.cookieSession());
-  app.use(everyauth.middleware());
+  app.use(everyauth.middleware(app));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-
-var counter   = require('./routing/counter')(app)
-  , register  = require('./routing/register')(app)
-  , login     = require('./routing/login')(app) 
-  , index     = require('./routing/index')(app)
-  , private   = require('./routing/private')(app)  
+//Controllers
+var counter   = require('./controller/counter')(app)
+  , register  = require('./controller/register')(app)
+  , login     = require('./controller/login')(app) 
+  , index     = require('./controller/index')(app)
+  , priv      = require('./controller/private')(app)
   ;
 
 
