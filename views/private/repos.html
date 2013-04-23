@@ -3,18 +3,19 @@
         $.ajax({
           url: "/private/repos",
           success: function (data, status, jqXHR) {
-            var repos = data;
 
             var createRepoElement = function(repo){
             	repoLi = document.createElement('li');
             	repoLi.appendChild(document.createTextNode(repo.name));
             	repoLi.style = "display: none;";
+              repoLi.class = "repo";
             	$('#repo-list').append(repoLi);
 	            setTimeout(function(){
 	              $('#' + repo.id).fadeIn('slow');  
 	            },1000);
             };
-            $.each(repos, function(){
+
+            $.each(data, function(){
             	createRepoElement(this);
             });
           }
