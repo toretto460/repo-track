@@ -22,8 +22,8 @@
             	createRepoElement(this);
             });
 
-            $('.repo').onClick(function(){
-              
+            $('.repo').click(function(){
+
               $.post('register', {repo_name: this.getAttribute('data-name')}, function(data){
                 console.log(data);
               });
