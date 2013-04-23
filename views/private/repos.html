@@ -9,6 +9,7 @@
             	repoLi.appendChild(document.createTextNode(repo.name));
             	repoLi.style = "display: none;";
               repoLi.class = "repo";
+              repoLi.data-name = repo.name;
             	$('#repo-list').append(repoLi);
 	            setTimeout(function(){
 	              $('#' + repo.id).fadeIn('slow');  
@@ -17,6 +18,14 @@
 
             $.each(data, function(){
             	createRepoElement(this);
+            });
+
+            $('.repo').onClick(function(){
+              var name = this.data-name;
+              $.post('register', {repo_name: this.data-name}, function(data){
+                console.log(data);
+              });
+                
             });
           }
         });
