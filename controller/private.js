@@ -1,12 +1,4 @@
-var GitHubApi = require("github"),
-		github 		= new GitHubApi({
-		// required
-    version: "3.0.0",
-    // optional
-    timeout: 5000,
-    // debug required
-    debug: true
-		});
+var github = require("../lib/github_api");
 
 module.exports = function ( app ) {
 
