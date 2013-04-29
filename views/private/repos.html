@@ -22,7 +22,7 @@
             	createRepoElement(this);
             });
 
-            $('.repo').click(function(){
+            $('#repo-list li').click(function(){
 
               $.post('register', {repo_name: this.getAttribute('data-name')}, function(data){
                 console.log(data);
