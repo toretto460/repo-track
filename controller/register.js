@@ -25,11 +25,11 @@ module.exports = function ( app ) {
 	});
 
 	app.post('/register', function (req, res) {
-		var MD5 = require('MD5');
+		var repo_manager = require('../manager/repo_manager');
 		name = req.body.repo_name;
 		if ( name ){
 			//generate repo id
-			repo_id = MD5(name);
+			repo_id = repo_manager.hashify(name);
 			//check if repoid already exists
 			app.get('redis_client').hexists(repo_id, 'counter', function(err, exists){
 				if ( !exists ) {

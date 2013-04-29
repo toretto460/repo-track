@@ -19,7 +19,7 @@ user_manager.connect(app, everyauth, conf);
 app.configure(function(){
   var redis_client = redis.createClient();
   app.set('redis_client', redis_client);
-  app.set('port', process.env.PORT || 80);
+  app.set('port', process.env.PORT || 8080);
   app.set('domain', process.env.DOTCLOUD_WWW_HTTP_URL || 'http://localhost:8080/');
   app.set('views', __dirname + '/views');
   app.engine('html', require('hbs').__express);

@@ -33,4 +33,17 @@ module.exports = function(app) {
         }
       });
   });
+
+  app.get('/:repoid/raw', function(req, res){
+
+      app.get('redis_client').hexists(repo_id, 'counter', function(err, exists){
+        if ( exists ) { 
+            app.get('redis_client').hget(repo_id, 'counter', function(err, value) {
+              res.json({'value': value});
+            });
+        } else {
+          res.send(404);
+        }
+      });
+  });
 };

@@ -11,10 +11,10 @@ module.exports = function ( app ) {
   	}	
   };
 
-	app.all('/private*', checkUser);
+	//app.all('/private*', checkUser);
 
 	app.get('/private', function (req, res) {
-    user = req.session.auth.github.user.name;
+    user = 'toretto460'//req.session.auth.github.user.name;
 		var data = {
 			user: user,
 			splash_form: "/private/repo-getter"
@@ -36,11 +36,15 @@ module.exports = function ( app ) {
 	app.get('/private/repos', function(req, res){
 
 			github.api.repos.getFromUser({
-			    user: req.session.auth.github.user.login
+			    user: 'toretto460'//req.session.auth.github.user.login
 			}, function(err, data) {
 				if(err){
 					console.log(err);
 				} else {
+					console.log(data);
+					for(var el in data){
+						console.log(el);
+					}
 					res.json(data);
 				}
 			});
