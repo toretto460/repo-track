@@ -1,9 +1,9 @@
 var github = require("../lib/github_api");
+var route_prefix = 'private';
 
 module.exports = function ( app ) {
 
   var checkUser = function(req, res, next){
-  	console.log(req.session.auth);
   	if (!req.session.auth) {
   		res.send(403);
   	} else {
@@ -11,10 +11,10 @@ module.exports = function ( app ) {
   	}	
   };
 
-	//app.all('/private*', checkUser);
+	app.all('/private*', checkUser);
 
-	app.get('/private', function (req, res) {
-    user = 'toretto460'//req.session.auth.github.user.name;
+    app.get('/'+ route_prefix, function (req, res) {
+    user = req.session.auth.github.user.name;
 		var data = {
 			user: user,
 			splash_form: "/private/repo-getter"
@@ -22,7 +22,7 @@ module.exports = function ( app ) {
 		res.render('layout/base.html', data);
 	});
 	
-	app.get('/private/repo-getter', function (req, res) {
+	app.get('/'+ route_prefix +'/repo-getter', function (req, res) {
 		app.render('private/repos.html', {}, function(err, html){
 			res.json(
 				{
@@ -33,10 +33,10 @@ module.exports = function ( app ) {
 		});
 	});
 
-	app.get('/private/repos', function(req, res){
+	app.get('/'+ route_prefix +'/repos', function(req, res){
 
 			github.api.repos.getFromUser({
-			    user: 'toretto460'//req.session.auth.github.user.login
+			    user: req.session.auth.github.user.login
 			}, function(err, data) {
 				if(err){
 					console.log(err);

@@ -35,6 +35,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+  app.use(require('./lib/dev/user_fixture').user_logged_in);
 });
 
 //Controllers
