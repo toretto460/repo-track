@@ -49,8 +49,6 @@ pre {
 	box-shadow: 0px 0px 10px 2px #3D3059;
 	min-height: 250px;
 	width: 560px;
-    transition: all 2s ease;
-    -webkit-transition: all 2s ease;
 }
 
 #repo-list {
