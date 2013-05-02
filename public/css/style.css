@@ -18,6 +18,10 @@ body {
   background-size: cover;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .centered {
 	margin: 0 auto;
 	display: block !important;
@@ -36,7 +40,7 @@ pre {
 .central-box {
 	color: #8F7CBB;
 	margin: 200px auto;
-	background-color: rgba(34,15,77, .6);
+	background-color: rgba(34,15,77, .9);
 	padding: 25px 10px 5px 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -45,6 +49,8 @@ pre {
 	box-shadow: 0px 0px 10px 2px #3D3059;
 	min-height: 250px;
 	width: 560px;
+    transition: all 2s ease;
+    -webkit-transition: all 2s ease;
 }
 
 #repo-list {
@@ -54,6 +60,22 @@ pre {
 
 #repo-list li {
 	padding: 3px 0;
+}
+
+.repo {
+    display: none;
+}
+
+.get-snippet {
+    cursor: pointer;
+}
+
+.to-right {
+    float: right;
+}
+
+.to-left {
+    float: left;
 }
 
 a {
