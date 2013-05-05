@@ -35,11 +35,19 @@ module.exports = function(app) {
   });
 
   app.get('/:repoid/raw', function(req, res){
-
+      var repo_id = require('../manager/repo_manager').hashify(req.params.repoid);
       app.get('redis_client').hexists(repo_id, 'counter', function(err, exists){
         if ( exists ) { 
             app.get('redis_client').hget(repo_id, 'counter', function(err, value) {
-              res.json({'value': value});
+
+                url = app.get('domain') + repo_id + '/counter';
+                var snippet = app.render('counter/snippet.html', { url: url}, function(err, html){
+                    if (err) {
+                        res.send(500, {message: 'rendering error.',  code: 500});
+                    } else {
+                        res.json(200, { message:'created.', id: repo_id,'value': value, snippet: html} );
+                    }
+                });
             });
         } else {
           res.send(404);

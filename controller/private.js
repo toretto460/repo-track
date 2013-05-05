@@ -40,11 +40,7 @@ module.exports = function ( app ) {
 			}, function(err, data) {
 				if(err){
 					console.log(err);
-				} else {
-					console.log(data);
-					for(var el in data){
-						console.log(el);
-					}
+                } else {
 					res.json(data);
 				}
 			});
