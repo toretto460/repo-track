@@ -23,7 +23,9 @@ app.configure(function(){
   app.set('domain', process.env.WWW_HTTPS_URL || 'http://localhost:8080/');
   app.set('views', __dirname + '/views');
   app.engine('html', require('hbs').__express);
-  app.use(require('express').static(__dirname + '/public'));
+  var oneDay = 86400000;
+  app.use(express.compress());
+  app.use(require('express').static(__dirname + '/public', { maxAge: oneDay }));
   app.set('view engine', 'html');
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
