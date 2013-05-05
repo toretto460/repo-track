@@ -101,6 +101,10 @@ pre {
     float: left;
 }
 
+.modal {
+    width: 608px;
+}
+
 a {
   color: #00B7FF;
 }
