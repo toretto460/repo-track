@@ -66,7 +66,7 @@ $(document).ready(function(){
                 url: '/' + repo.id + '/raw',
                 success: function(data, textStatus, jqHR){
                     if(textStatus === 'success') {
-                        counterValue.innerText = '('+ data.value + ')';
+                        counterValue.innerText = data.value ;
                         el.snippet = data.snippet;
                     }
                 },
@@ -80,12 +80,10 @@ $(document).ready(function(){
             $(repoLi).append(getCounterSnippet);
             $(repoLi).append(counter);
             $(repoLi).fadeIn('slow');
-            $(getCounterSnippet).click(function(){
-
-            });
       });
 
       $('.bubblingG').hide();
+      $('thead').fadeIn();
 
       });
 

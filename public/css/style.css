@@ -11,6 +11,8 @@
 
 body {
   font: 14px "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  color: #8F7CBB;
   background: url(/images/bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -23,15 +25,29 @@ body {
 }
 
 #app-name {
-    font-family: 'Meie Script', cursive;
     font-size: 55px;
-    color: #C0C0C0;
+    font-weight: 100;
     text-shadow: 3px -2px 1px #00092C;
     margin: 10px auto !important;
 }
 .centered {
 	margin: 0 auto;
 	display: block !important;
+}
+
+.table-repo-hover tr:hover {
+     background: rgba(68,46,119, .9);
+}
+
+.table-repo-hover tr {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.table-repo-hover thead {
+    color: #7F65BB;
+    font-weight: bold;
 }
 
 input[type=text] {
@@ -43,9 +59,10 @@ pre {
 	margin-top: 10px;
 }
 
-
+.repo-navbar {
+    background-color: rgba(34,15,77, .9);
+}
 .central-box {
-	color: #8F7CBB;
     overflow-y: scroll;
 	margin: 120px auto 0 auto;
 	background-color: rgba(34,15,77, .9);
@@ -55,10 +72,19 @@ pre {
 	border-radius: 10px;
 	-webkit-box-shadow: 0px 0px 10px 2px #3D3059;
 	box-shadow: 0px 0px 10px 2px #3D3059;
-	height: 450px;
-	width: 560px;
+	height: 480px;
 }
 
+.big-message {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 44px;
+}
+.big-message2x {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 78px;
+}
 #repo-list {
 	list-style: none;
 	text-transform: capitalize;
