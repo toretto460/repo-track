@@ -25,7 +25,9 @@ $(document).ready(function(){
         repoLi = document.createElement('tr');
         reponame = document.createElement('td');
         reponame.className = 'element  with-pointer';
-        $(reponame).text(repo.name);
+        //$(reponame).text(repo.name);
+        console.log(repo.snippet);
+        $(reponame).html('<i class="icon-2x icon-plus-sign">' + repo.name + '</i>');
         repoLi.appendChild(reponame);
         repoLi.style = "display: none;";
         repoLi.className = "repo";
@@ -57,6 +59,7 @@ $(document).ready(function(){
                 $('#snippet').text(snippet);
 
             });
+
             var counter = document.createElement('td');
             counter.className = "counter";
             counter.setAttribute('data-repo', repo.id);

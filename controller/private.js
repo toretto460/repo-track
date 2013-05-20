@@ -40,8 +40,9 @@ module.exports = function ( app ) {
 			}, function(err, data) {
 				if(err){
 					console.log(err);
+                    res.send(500);
                 } else {
-					res.json(data);
+                    res.json(data);
 				}
 			});
 		

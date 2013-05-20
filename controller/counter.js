@@ -1,4 +1,5 @@
-var Canvas = require('canvas');
+var Canvas = require('canvas'),
+    fs     = require('fs');
 
 module.exports = function(app) {
 
@@ -9,11 +10,21 @@ module.exports = function(app) {
 
     var sendCanvas = function (res, value) {
       res.cookie('repo_track', { viewed: 1 }, { expires: new Date(Date.now() + (30*24*60*60*1000)) });
-      canvas = new Canvas(50,20);
-      ctx = canvas.getContext('2d');
-      ctx.font = '20px Verdana';
-      ctx.fillText(value, 0, 15);
-      res.send(canvas.toBuffer());  
+        fs.readFile(__dirname + '/../public/images/base.png', function(err, squid){
+            if (err) throw err;
+            canvas = new Canvas(80,20);
+            ctx = canvas.getContext('2d');
+            img = new Canvas.Image;
+            img.src = squid;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            ctx.font = '12px Verdana';
+            ctx.fillStyle = 'rgb(255,255,255,1)';
+            ctx.fillText(value, 0, 14);
+            ctx.font = '10px Verdana';
+            ctx.fillText('visits', 33, 12);
+            res.send(canvas.toBuffer());
+        });
+
     };  
 
       app.get('redis_client').hexists(repo_id, 'counter', function(err, exists){
